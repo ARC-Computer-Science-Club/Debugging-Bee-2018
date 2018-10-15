@@ -2,7 +2,7 @@
 #include "SoftwareSerial.h"
 #include "DFRobotDFPlayerMini.h"
 
-const int sdPinRX = 0
+const int sdPinRX = 0;
 const int sdPinTX = 1;
 
 const int startButtonPin = 5;
