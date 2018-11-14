@@ -1,8 +1,8 @@
-int inputYellow = 3;
-int inputGreen = 4;
-int ledYellow = 7;
-int ledGreen = 10;
-int ledRgb = 6;
+const int inputYellow = 4;
+const int inputGreen = 3;
+const int ledYellow = 7;
+const int ledGreen = 10;
+const int ledRgb = 6;
 bool onYellow = false;
 bool onGreen = false;
 char bitwiseOp = '\0';
@@ -16,22 +16,18 @@ void setup() {
   pinMode(ledGreen, OUTPUT);
   pinMode(ledRgb, OUTPUT);
   Serial.begin(9600);
-  Serial.println("printing");
+  Serial.println("Select a logic gate(&, |, or ^): ");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  //Serial.println(digitalRead(inputYellow));
-   
+  // put your main code here, to run repeatedly:   
    while (Serial.available() > 0 && bitwise == false) {
                 // read the incoming byte:
-                 
                  bitwiseOp = Serial.read();
 
                 // say what you got:
-                Serial.print("I received: ");
+                Serial.print("received: ");
                 Serial.println(bitwiseOp);
-
                 if ( bitwiseOp == '&' || bitwiseOp == '^' || bitwiseOp == '|')
                 {
                   bitwise = true;
@@ -39,7 +35,7 @@ void loop() {
                 else
                 {
                   bitwise = false;
-                  }
+                }
         }
         
   if(digitalRead(inputYellow) == HIGH && onYellow == false)
@@ -71,8 +67,9 @@ void loop() {
   switch (bitwiseOp)
   {
     case '^':
-         if (onGreen ^ onYellow)
+         if (onGreen||onYellow && !(onGreen && onYellow))
          {
+          
             digitalWrite(ledRgb, HIGH);
          }
          else
