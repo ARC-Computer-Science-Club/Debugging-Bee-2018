@@ -26,7 +26,7 @@ void loop() {
       case 1:
         digitalWrite(UV_LED,HIGH);
       break;
-      case 2;
+      case 2:
         digitalWrite(WHITE_LED,HIGH);
         digitalWrite(UV_LED,LOW);
       break;
