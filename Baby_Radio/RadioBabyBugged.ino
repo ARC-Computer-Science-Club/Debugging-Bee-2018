@@ -64,7 +64,7 @@ void loop() {
     started = true;
     myDFPlayer.play(1);
   }
-  else if(!(!(stopButtonState && !startButtonState) || !stopButtonState || !link1State || !(!link2State || link3State)))
+  else if(stopButtonState && !(!stopButtonState || startButtonState || link1State) && !(link2State || !link3State))
   {
     myDFPlayer.stop();
     started = false;
