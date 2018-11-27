@@ -67,7 +67,7 @@ void loop() {
   switch (bitwiseOp)
   {
     case '^':
-         if (onGreen||onYellow && !(onGreen && onYellow))
+         if (onGreen^onYellow)
          {
           
             digitalWrite(ledRgb, HIGH);
