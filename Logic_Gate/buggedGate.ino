@@ -16,7 +16,7 @@ void setup() {
   pinMode(ledGreen, OUTPUT)
   pinMode(ledRgb, OUTPUT);
   Serial.begin(9600);
-  Serial.print("Select a logic gate(&, |, or ^): ");
+  Serial.println("Select a logic gate(&, |, or ^): ");
 }
 
 void loop() {
@@ -67,7 +67,7 @@ void loop() {
   switch (bitwiseOp)
   {
     case '^':
-         if (onGreen&&onYellow && !(onGreen || onYellow))
+         if ((onGreen && onYellow) && !(onGreen || onYellow))
          {
           
             digitalWrite(ledRgb, HIGH);
