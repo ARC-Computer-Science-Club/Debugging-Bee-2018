@@ -7,21 +7,19 @@ const int sdPinTX = 1;
 
 const int startButtonPin = 5;
 const int stopButtonPin  = 6;
-const int link1OutPin =  7;
-const int link1InPin  =  8;
-const int link2OutPin =  9;
-const int link2InPin  = 10;
-const int link3OutPin = 11;
-const int link3InPin  = 12;
-const int ledPin = LED_BUILTIN;
+const int whiteOutPin =  7;
+const int whiteInPin  =  8;
+const int blueOutPin =  9;
+const int blueInPin  = 10;
+const int yellowOutPin = 11;
+const int yellowInPin  = 12;
 
 bool started = false;
-int ledState = LOW;
 int startButtonState;
 int stopButtonState;
-int link1State;
-int link2State;
-int link3State;
+int white;
+int blue;
+int yellow;
 
 SoftwareSerial mySoftwareSerial(sdPinRX, sdPinTX);
 DFRobotDFPlayerMini myDFPlayer;
@@ -29,20 +27,19 @@ DFRobotDFPlayerMini myDFPlayer;
 void setup() {
   pinMode(startButtonPin, INPUT);
   pinMode(stopButtonPin, INPUT);
-  pinMode(link1OutPin, OUTPUT);
-  pinMode(link2OutPin, OUTPUT);
-  pinMode(link3OutPin, OUTPUT);
-  pinMode(link1InPin, INPUT);
-  pinMode(link2InPin, INPUT);
-  pinMode(link3InPin, INPUT);
+  pinMode(whiteOutPin, OUTPUT);
+  pinMode(blueOutPin, OUTPUT);
+  pinMode(yellowOutPin, OUTPUT);
+  pinMode(whiteInPin, INPUT);
+  pinMode(blueInPin, INPUT);
+  pinMode(yellowInPin, INPUT);
 
   pinMode(sdPinRX, INPUT);
   pinMode(sdPinTX, OUTPUT);
    
-  digitalWrite(ledPin, ledState);
-  digitalWrite(link1OutPin, LOW);
-  digitalWrite(link2OutPin, HIGH);
-  digitalWrite(link3OutPin, HIGH);
+  digitalWrite(whiteOutPin, LOW);
+  digitalWrite(blueOutPin, HIGH);
+  digitalWrite(yellowOutPin, HIGH);
 
   mySoftwareSerial.begin(9600);
   
@@ -54,22 +51,18 @@ void setup() {
 void loop() {
   int startButtonState = digitalRead(startButtonPin);
   int stopButtonState = digitalRead(stopButtonPin);
-  int link1State = digitalRead(link1InPin);
-  int link2State = digitalRead(link2InPin);
-  int link3State = digitalRead(link3InPin);
+  int link1State = digitalRead(whiteInPin);
+  int link2State = digitalRead(blueInPin);
+  int link3State = digitalRead(yellowInPin);
 
   if( startButtonState && !stopButtonState && !started )
   {
-    ledState = HIGH;
     started = true;
     myDFPlayer.play(1);
   }
-  else if(stopButtonState && !(!stopButtonState || startButtonState || link1State) && !(link2State || !link3State))
+  else if(stopButtonState && !(!stopButtonState || startButtonState || white) && !(blue || !yellow))
   {
     myDFPlayer.stop();
     started = false;
-    ledState = LOW;
   }
-
-  digitalWrite(ledPin, ledState);
 }
