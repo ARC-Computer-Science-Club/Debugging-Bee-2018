@@ -51,9 +51,9 @@ void setup() {
 void loop() {
   int startButtonState = digitalRead(startButtonPin);
   int stopButtonState = digitalRead(stopButtonPin);
-  int link1State = digitalRead(whiteInPin);
-  int link2State = digitalRead(blueInPin);
-  int link3State = digitalRead(yellowInPin);
+  int white = digitalRead(whiteInPin);
+  int blue = digitalRead(blueInPin);
+  int yellow = digitalRead(yellowInPin);
 
   if( startButtonState && !stopButtonState && !started )
   {
